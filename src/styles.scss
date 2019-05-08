@@ -2,5 +2,40 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; @extend .primary-bg; }
 
+* {
+    outline: none !important;
+}
+
+$primary-color: #519839;
+$darker-color: #458131;
+
+.primary-bg {
+    background: $primary-color;
+}
+
+.primary-color {
+    color: $primary-color;
+}
+
+.darker-bg {
+    background: $darker-color;
+}
+
+.darker-hover:hover {
+    background: darken($darker-color, 3%);
+
+}
+
+.darker-color {
+    color: $darker-color;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.white-color {
+    color: #fff;
+}
