@@ -2,7 +2,7 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; @extend .primary-bg; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; @extend .primary-bg;}
 
 * {
     outline: none !important;
@@ -25,10 +25,9 @@ $darker-color: #458131;
 
 .darker-hover:hover {
     background: darken($darker-color, 3%);
-
 }
 
-.darker-color {
+.darker-color, .primary-hover:hover {
     color: $darker-color;
 }
 
@@ -37,5 +36,13 @@ $darker-color: #458131;
 }
 
 .white-color {
-    color: #fff;
+    color: #fff !important;
+}
+
+.white-bg {
+    background: #e0e3e7;
+}
+
+.br-5 {
+    border-radius: 5px;
 }

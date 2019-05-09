@@ -1,14 +1,67 @@
-<ng-container *ngIf="animusList && animusList.length; else newBoardTemplate">
+<div class="board">
+  <!-- List sequence starts -->
+  <ng-container *ngIf="animusList && animusList.length; else pristineNewListTemplate">
+    <ng-container *ngFor="let list of animusList; let last=last">
+      <div class="animus-list">
+        <animus-list></animus-list>
+      </div>
+      <ng-container *ngIf="last">
+        <ng-container *ngTemplateOutlet="pristineNewListTemplate; context: {boardHasList: true}">
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+  <!-- List sequence ends -->
 
-</ng-container>
+  <!-- New list UI, in read mode -->
+  <ng-template #pristineNewListTemplate let-existingBoard="boardHasList">
+    <ng-container *ngIf="!touchedNewListState; else touchedNewListTemplate">
+      <div class="animus-list">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <button (click)="onNewListAddTouched()" mat-flat-button
+                class="darker-bg darker-hover full-width white-color text-left add-list-button" disableRipple="true">
+                <i class="material-icons add-list-icon">add</i>
+                <span *ngIf="boardHasList">
+                  Add another list
+                </span>
+                <span *ngIf="!boardHasList">
+                  Add a list
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
 
-<ng-template #newBoardTemplate>
-  <div class="row list-container">
-    <div class="col">
-      <button mat-flat-button class="darker-bg darker-hover full-width white-color text-left add-list-button" disableRipple="true">
-        <i class="material-icons add-list-icon">add</i>
-        Add a list
-      </button>
+  <!-- New list UI in edit mode -->
+  <ng-template #touchedNewListTemplate>
+    <div class="animus-list">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="white-bg px-2 pb-1 br-5">
+              <input #newListTitle (keyup.enter)="addNewList(newListTitle.value)" type="text"
+                class="full-width title-input px-2" placeholder="Enter list title...">
+              <div class="row">
+                <div class="col">
+                  <button class="primary-bg primary-hover white-color" (click)="addNewList(newListTitle.value)"
+                    mat-flat-button>
+                    Add list
+                  </button>
+                  <button mat-icon-button (click)="resetNewList()">
+                    <i class="material-icons">close</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</ng-template>
+  </ng-template>
+
+</div>

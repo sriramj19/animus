@@ -5,14 +5,17 @@ import { BoardRoutingModule } from './board-routing.module';
 import { BoardComponent } from './board/board.component';
 
 import {MatButtonModule, MatIconModule} from '@angular/material';
+import { ListComponent } from './list/list.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [BoardComponent],
+  declarations: [BoardComponent, ListComponent],
   imports: [
     CommonModule,
     BoardRoutingModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ]
 })
 export class BoardModule { }
