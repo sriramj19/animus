@@ -1,10 +1,12 @@
 <div class="board">
   <!-- List sequence starts -->
-  <ng-container *ngIf="animusList && animusList.length; else pristineNewListTemplate">
-    <ng-container *ngFor="let list of animusList; let last=last">
-      <div class="animus-list">
-        <animus-list></animus-list>
-      </div>
+  <ng-container *ngIf="animusBoard && animusBoard.length; else pristineNewListTemplate">
+    <ng-container *ngFor="let list of animusBoard; let last=last">
+      <ng-container *ngIf="list.state === 'active'">
+        <div class="animus-list">
+          <animus-list [list]="list" (archiveList)="archiveList(list)"></animus-list>
+        </div>
+      </ng-container>
       <ng-container *ngIf="last">
         <ng-container *ngTemplateOutlet="pristineNewListTemplate; context: {boardHasList: true}">
         </ng-container>
@@ -52,7 +54,7 @@
                     mat-flat-button>
                     Add list
                   </button>
-                  <button mat-icon-button (click)="resetNewList()">
+                  <button title="Discard" mat-icon-button (click)="resetNewList()">
                     <i class="material-icons">close</i>
                   </button>
                 </div>

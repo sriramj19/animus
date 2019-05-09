@@ -1,7 +1,16 @@
-<div class="container white-bg br-5 p-2">
-  <div class="row">
-    <div class="col">
-      Sample list name
+<div class="container white-bg br-5 p-2" *ngIf="currentList">
+  <ng-container *ngIf="!editTitleState; else editListTitleTemplate">
+    <div class="row list-title clickable" (click)="toggleEditTitleState();">
+      <div class="col">
+        {{currentList.title}}
+        <i title="Archive list" class="material-icons float-right archive-icon"
+          (click)="archiveCurrentList($event)">archive</i>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </div>
+
+<ng-template #editListTitleTemplate>
+  <input #listTitle [(ngModel)]="currentList.title" (keyup.enter)="toggleEditTitleState()" type="text"
+    class="full-width title-input px-2" placeholder="Enter list title...">
+</ng-template>
