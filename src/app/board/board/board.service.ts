@@ -8,6 +8,8 @@ export class BoardService {
 
   constructor(private utilServ: UtilService) { }
 
+  public trackingIds: string[] = [];
+
   /**
    * @description form a new board
    * @param boardName the name of the board
@@ -44,6 +46,7 @@ export class BoardService {
     newList.order = newList.id;
     newList.title = title.trim();
     newList.state = 'active';
+    newList.trackingId = 'animus-' + newList.id;
     return newList;
   }
 
@@ -54,6 +57,18 @@ export class BoardService {
    */
   public removeListById(id: number, listOfLists: List[]) {
     return listOfLists.filter(list => list.id !== id);
+  }
+
+  /**
+   * @description set the trackers for drag and drop
+   * @param listOfList the list of lists in the board
+   */
+  public setTrackers(listOfList: List[]) {
+    try {
+      this.trackingIds = listOfList.filter(list => list.state === 'active').map(list => list.trackingId);
+    } catch (error) {
+      this.utilServ.raiseException('setting trackers', error);
+    }
   }
 
 }

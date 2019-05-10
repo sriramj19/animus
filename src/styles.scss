@@ -103,3 +103,7 @@ $darker-color: #458131;
   -moz-hyphens: auto;
   hyphens: auto;
 }
+
+textarea {
+  resize: none !important
+}

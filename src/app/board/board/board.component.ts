@@ -8,8 +8,7 @@ import { ANIMUSSAMPLEBOARD } from 'src/app/util/mock/animus.data';
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss'],
-  providers: [BoardService]
+  styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
 
@@ -25,7 +24,12 @@ export class BoardComponent implements OnInit {
   }
 
   private initiateDefaults() {
-    this.board = ANIMUSSAMPLEBOARD;
+    this.board = this.fetchStub();
+    this.boardServ.setTrackers(this.board.listOfList)
+  }
+
+  private fetchStub() {
+    return ANIMUSSAMPLEBOARD;
   }
 
   /**
@@ -59,6 +63,7 @@ export class BoardComponent implements OnInit {
   public addNewList(title: string) {
     if (title && title.trim()) {
       this.board.listOfList.push(this.boardServ.formNewList(title, this.board.listOfList));
+      this.boardServ.setTrackers(this.board.listOfList)
       this.resetNewList();
     }
   }
@@ -69,6 +74,7 @@ export class BoardComponent implements OnInit {
    */
   public archiveList(list: List) {
     list.state = 'archived';
+    this.boardServ.setTrackers(this.board.listOfList)
   }
 
 }

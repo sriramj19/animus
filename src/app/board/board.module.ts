@@ -10,6 +10,10 @@ import { FormsModule } from '@angular/forms';
 import { UtilService } from '../util/services/util.service';
 import { CardComponent } from './card/card.component';
 
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { BoardService } from './board/board.service';
+
+
 @NgModule({
   declarations: [BoardComponent, ListComponent, CardComponent],
   imports: [
@@ -18,8 +22,9 @@ import { CardComponent } from './card/card.component';
     MatButtonModule,
     MatIconModule,
     FormsModule,
-    MatMenuModule
+    MatMenuModule,
+    DragDropModule
   ],
-  providers: [UtilService]
+  providers: [UtilService, BoardService]
 })
 export class BoardModule { }

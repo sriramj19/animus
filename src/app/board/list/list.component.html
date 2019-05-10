@@ -1,4 +1,6 @@
-<div class="container white-bg br-5 px-2 pt-2 list-wrapper" *ngIf="currentList">
+<div class="container white-bg br-5 px-2 pt-2 list-wrapper" *ngIf="currentList" cdkDropList
+  [id]="currentList.trackingId" [cdkDropListData]="currentList.cardList" [cdkDropListConnectedTo]="trackingIds"
+  (cdkDropListDropped)="onCardDrop($event)">
   <ng-container *ngIf="!editTitleState; else editListTitleTemplate">
     <div class="row list-title clickable fs-small" (click)="toggleEditTitleState();">
       <div class="col">
@@ -14,7 +16,7 @@
   <ng-container *ngIf="currentList && currentList.cardList && currentList.cardList.length;">
     <ng-container *ngFor="let card of currentList.cardList;">
       <ng-container *ngIf="card.state === 'active'">
-        <card [card]="card" (archiveCard)="archiveCard(card)"></card>
+        <card cdkDrag [card]="card" (archiveCard)="archiveCard(card)"></card>
       </ng-container>
     </ng-container>
   </ng-container>

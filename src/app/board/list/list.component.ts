@@ -2,6 +2,9 @@ import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter }
 import { List } from './list';
 import { ListService } from './list.service';
 import { Card } from '../card/card';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { BoardService } from '../board/board.service';
+import { UtilService } from 'src/app/util/services/util.service';
 
 @Component({
   selector: 'animus-list',
@@ -11,7 +14,7 @@ import { Card } from '../card/card';
 })
 export class ListComponent implements OnInit {
 
-  constructor(private listServ: ListService) { }
+  constructor(private listServ: ListService, private boardServ: BoardService, private utilServ: UtilService) { }
 
   @Input('list') currentList: List;
   @Output('archiveList') private archiveList: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -95,6 +98,32 @@ export class ListComponent implements OnInit {
     if (title && title.trim()) {
       this.toggleEditTitleState();
     }
+  }
+
+  /**
+   * @description on card drag drop
+   * @param event the drag drop event triggered
+   */
+  onCardDrop(event: CdkDragDrop<Card[]>) {
+    try {
+      if (event.previousContainer === event.container) {
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      } else {
+        transferArrayItem(event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex);
+      }
+    } catch (error) {
+      this.utilServ.raiseException('drag dropping a card', error);
+    }
+  }
+
+  /**
+   * @description fetch the updated tracking ids of the lists to track
+   */
+  get trackingIds(): string[] {
+    return this.boardServ.trackingIds;
   }
 
 }

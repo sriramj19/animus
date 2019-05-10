@@ -6,4 +6,5 @@ export class List {
     state: 'active' | 'archived' | 'deleted';
     order: number;
     cardList: Card[] = [];
+    trackingId: string;
 }
