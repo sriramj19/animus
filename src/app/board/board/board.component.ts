@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { List } from './board';
+import { List, Board } from './board';
 import { UtilService } from 'src/app/util/services/util.service';
 import { BoardService } from './board.service';
 
@@ -13,12 +13,17 @@ export class BoardComponent implements OnInit {
 
   constructor(private utilServ: UtilService, private boardServ: BoardService) { }
 
-  public animusBoard: List[] = [];
-  public touchedNewListState: boolean = false;
+  public board: Board;
+  public touchedNewListState: boolean;
   @ViewChild('newListTitle') private newListTitle: ElementRef;
 
   ngOnInit() {
     this.utilServ.setTitle('Animus - Board');
+    this.initiateDefaults();
+  }
+
+  private initiateDefaults() {
+    this.board = this.boardServ.formNewBoard();
   }
 
   /**
@@ -51,7 +56,7 @@ export class BoardComponent implements OnInit {
    */
   public addNewList(title: string) {
     if (title && title.trim()) {
-      this.animusBoard.push(this.boardServ.formListFromTitle(title, this.animusBoard));
+      this.board.listOfList.push(this.boardServ.formNewList(title, this.board.listOfList));
       this.resetNewList();
     }
   }
@@ -61,7 +66,7 @@ export class BoardComponent implements OnInit {
    * @param list the list to be archived
    */
   public archiveList(list: List) {
-    this.animusBoard = this.boardServ.removeListById(list.id, this.animusBoard);
+    this.board.listOfList = this.boardServ.removeListById(list.id, this.board.listOfList);
   }
 
 }

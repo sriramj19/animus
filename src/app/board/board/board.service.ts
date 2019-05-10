@@ -1,11 +1,21 @@
 import { Injectable } from '@angular/core';
-import { List } from './board';
+import { List, Board } from './board';
 import { UtilService } from 'src/app/util/services/util.service';
 
 @Injectable()
 export class BoardService {
 
   constructor(private utilServ: UtilService) { }
+
+  /**
+   * @description form a new board
+   * @param boardName the name of the board
+   */
+  public formNewBoard(boardName: string = 'Animus') {
+    let _board = new Board();
+    _board.name = boardName;
+    return _board;
+  }
 
   /**
    * @description get the auto increment id for list
@@ -27,9 +37,10 @@ export class BoardService {
    * @param title the title of the list
    * @param board the board to fetch auto increment id
    */
-  public formListFromTitle(title: string, board: List[]) {
+  public formNewList(title: string, board: List[]) {
     let newList: List = new List();
     newList.id = this.getAutoIncrementForList(board);
+    newList.order = newList.id;
     newList.title = title.trim();
     newList.state = 'active';
     return newList;

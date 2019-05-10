@@ -1,7 +1,7 @@
 <div class="board">
   <!-- List sequence starts -->
-  <ng-container *ngIf="animusBoard && animusBoard.length; else pristineNewListTemplate">
-    <ng-container *ngFor="let list of animusBoard; let last=last">
+  <ng-container *ngIf="board && board.listOfList && board.listOfList.length; else pristineNewListTemplate">
+    <ng-container *ngFor="let list of board.listOfList; let last=last">
       <ng-container *ngIf="list.state === 'active'">
         <div class="animus-list">
           <animus-list [list]="list" (archiveList)="archiveList(list)"></animus-list>
