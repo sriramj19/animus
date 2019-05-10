@@ -25,7 +25,7 @@ export class BoardComponent implements OnInit {
 
   private initiateDefaults() {
     this.board = this.fetchStub();
-    this.boardServ.setTrackers(this.board.listOfList)
+    this.setDragTrackers();
   }
 
   private fetchStub() {
@@ -63,7 +63,7 @@ export class BoardComponent implements OnInit {
   public addNewList(title: string) {
     if (title && title.trim()) {
       this.board.listOfList.push(this.boardServ.formNewList(title, this.board.listOfList));
-      this.boardServ.setTrackers(this.board.listOfList)
+      this.setDragTrackers();
       this.resetNewList();
     }
   }
@@ -74,7 +74,19 @@ export class BoardComponent implements OnInit {
    */
   public archiveList(list: List) {
     list.state = 'archived';
-    this.boardServ.setTrackers(this.board.listOfList)
+    this.setDragTrackers();
+  }
+
+  private setDragTrackers() {
+    try {
+      if (this.board && this.board.listOfList && this.board.listOfList.length) {
+        this.boardServ.setTrackers(this.board.listOfList)
+      } else {
+        this.boardServ.setTrackers([]);
+      }
+    } catch (error) {
+      this.utilServ.raiseException('setting drag tracker', error);
+    }
   }
 
 }
