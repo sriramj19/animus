@@ -6,8 +6,8 @@
         {{card.title}}
       </span>
 
-      <div class="options-icon">
-        <mat-icon [matMenuTriggerFor]="cardMenu">more_horiz</mat-icon>
+      <div class=" options-icon" [matMenuTriggerFor]="cardMenu">
+        <mat-icon>more_horiz</mat-icon>
         <mat-menu #cardMenu="matMenu">
           <button mat-menu-item (click)="toggleEditTitleState()">
             <mat-icon>edit</mat-icon>
@@ -18,7 +18,7 @@
             <span>Archive</span>
           </button>
         </mat-menu>
-      </div>
+    </div>
     </div>
   </ng-container>
 </ng-container>

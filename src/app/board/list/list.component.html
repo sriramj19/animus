@@ -1,4 +1,4 @@
-<div class="container white-bg br-5 px-2 pt-2" *ngIf="currentList">
+<div class="container white-bg br-5 px-2 pt-2 list-wrapper" *ngIf="currentList">
   <ng-container *ngIf="!editTitleState; else editListTitleTemplate">
     <div class="row list-title clickable fs-small" (click)="toggleEditTitleState();">
       <div class="col">
@@ -46,7 +46,7 @@
       <div class="col">
         <span class="add-card-icon">+</span>
         <span class="add-card fs-small">
-          {{list?.cardList && list?.cardList.length ? 'Add another card' : 'Add a card'}}
+          {{currentList?.cardList && currentList?.cardList.length ? 'Add another card' : 'Add a card'}}
         </span>
       </div>
     </div>

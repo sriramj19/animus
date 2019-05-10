@@ -3,6 +3,7 @@ import { Board } from './board';
 import { UtilService } from 'src/app/util/services/util.service';
 import { BoardService } from './board.service';
 import { List } from '../list/list';
+import { ANIMUSSAMPLEBOARD } from 'src/app/util/mock/animus.data';
 
 @Component({
   selector: 'app-board',
@@ -24,7 +25,7 @@ export class BoardComponent implements OnInit {
   }
 
   private initiateDefaults() {
-    this.board = this.boardServ.formNewBoard();
+    this.board = ANIMUSSAMPLEBOARD;
   }
 
   /**

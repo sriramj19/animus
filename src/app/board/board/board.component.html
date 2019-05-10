@@ -25,10 +25,10 @@
               <button (click)="onNewListAddTouched()" mat-flat-button
                 class="darker-bg darker-hover full-width white-color text-left add-list-button" disableRipple="true">
                 <i class="material-icons add-list-icon">add</i>
-                <span *ngIf="boardHasList">
+                <span *ngIf="existingBoard">
                   Add another list
                 </span>
-                <span *ngIf="!boardHasList">
+                <span *ngIf="!existingBoard">
                   Add a list
                 </span>
               </button>
