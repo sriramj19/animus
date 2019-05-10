@@ -1,19 +1,24 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
-import { List } from '../board/board';
+import { List } from './list';
+import { ListService } from './list.service';
+import { Card } from '../card/card';
 
 @Component({
   selector: 'animus-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
+  providers: [ListService]
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private listServ: ListService) { }
 
   @Input('list') currentList: List;
   @Output('archiveList') private archiveList: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('listTitle') private listTitleInput: ElementRef;
+  @ViewChild('newCardInput') private newCardInput: ElementRef;
   public editTitleState: boolean;
+  public addCardState: boolean;
 
   ngOnInit() {
   }
@@ -39,6 +44,13 @@ export class ListComponent implements OnInit {
   }
 
   /**
+   * @description set the focus to the new card input
+   */
+  public setFocusToNewCardInput() {
+    this.newCardInput && this.newCardInput.nativeElement && this.newCardInput.nativeElement.focus();
+  }
+
+  /**
    * @description archive list
    * @param event the click event
    */
@@ -48,6 +60,41 @@ export class ListComponent implements OnInit {
     }
 
     this.archiveList.emit(true);
+  }
+
+  public toggleAddCardState() {
+    this.addCardState = !this.addCardState;
+
+    if (this.addCardState) {
+      setTimeout(() => {
+        this.setFocusToNewCardInput();
+      });
+    }
+  }
+
+  public addNewCard(title: string) {
+    if (title && title.trim()) {
+      this.currentList.cardList.push(this.listServ.formNewCard(title, this.currentList.cardList));
+      this.toggleAddCardState();
+    }
+  }
+
+  /**
+   * @description archive a particular list
+   * @param list the card to be archived
+   */
+  public archiveCard(card: Card) {
+    card.state = 'archived';
+  }
+
+  /**
+   * @description event triggered upon title edition
+   * @param title the new title
+   */
+  public onTitleEdit(title: string) {
+    if (title && title.trim()) {
+      this.toggleEditTitleState();
+    }
   }
 
 }

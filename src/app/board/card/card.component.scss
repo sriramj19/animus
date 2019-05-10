@@ -1,0 +1,34 @@
+.animus-card {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+  cursor: pointer;
+  display: block;
+  margin-bottom: 8px;
+  max-width: 300px;
+  min-height: 20px;
+  position: relative;
+  text-decoration: none;
+  z-index: 0;
+}
+
+.animus-card:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.options-icon {
+  font-size: 1.5rem;
+  position: absolute;
+  right: 8px;
+  top: 4px;
+  display: none;
+  color: #696969;
+}
+
+.animus-card:hover .options-icon {
+  display: block;
+}
+
+.animus-card:hover .options-icon:hover {
+  color: #000;
+}

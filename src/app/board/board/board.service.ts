@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { List, Board } from './board';
+import { Board } from './board';
 import { UtilService } from 'src/app/util/services/util.service';
+import { List } from '../list/list';
 
 @Injectable()
 export class BoardService {
@@ -19,12 +20,12 @@ export class BoardService {
 
   /**
    * @description get the auto increment id for list
-   * @param currentBoard the current board of lists
+   * @param listOfList list of lists
    */
-  public getAutoIncrementForList(currentBoard: List[]) {
+  public getAutoIncrementForList(listOfList: List[]) {
     try {
-      if (currentBoard && currentBoard.length) {
-        return this.utilServ.getLargestNumber(currentBoard.map(list => list.id)) + 1;
+      if (listOfList && listOfList.length) {
+        return this.utilServ.getLargestNumber(listOfList.map(list => list.id)) + 1;
       }
       return 1;
     } catch (error) {
@@ -35,11 +36,11 @@ export class BoardService {
   /**
    * @description form the list body from the title
    * @param title the title of the list
-   * @param board the board to fetch auto increment id
+   * @param existingList the existing list to fetch auto increment id
    */
-  public formNewList(title: string, board: List[]) {
+  public formNewList(title: string, existingList: List[]) {
     let newList: List = new List();
-    newList.id = this.getAutoIncrementForList(board);
+    newList.id = this.getAutoIncrementForList(existingList);
     newList.order = newList.id;
     newList.title = title.trim();
     newList.state = 'active';
@@ -49,10 +50,10 @@ export class BoardService {
   /**
    * @description remove a list by id
    * @param id the id of the list to be removed
-   * @param board the board of lists
+   * @param listOfLists the list of lists
    */
-  public removeListById(id: number, board: List[]) {
-    return board.filter(list => list.id !== id);
+  public removeListById(id: number, listOfLists: List[]) {
+    return listOfLists.filter(list => list.id !== id);
   }
 
 }

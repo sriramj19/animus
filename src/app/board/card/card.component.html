@@ -1,0 +1,32 @@
+<ng-container *ngIf="card">
+  <ng-container *ngIf="!editTitleState; else editCardTitleTemplate">
+
+    <div class="animus-card mt-2 p-1">
+      <span class="fs-small">
+        {{card.title}}
+      </span>
+
+      <div class="options-icon">
+        <mat-icon [matMenuTriggerFor]="cardMenu">more_horiz</mat-icon>
+        <mat-menu #cardMenu="matMenu">
+          <button mat-menu-item (click)="toggleEditTitleState()">
+            <mat-icon>edit</mat-icon>
+            <span>Edit title</span>
+          </button>
+          <button mat-menu-item (click)="archiveCurrentCard(card)">
+            <mat-icon>archive</mat-icon>
+            <span>Archive</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #editCardTitleTemplate>
+  <div class="white-bg px-2 pb-1 br-5">
+    <textarea #editCardInput (keyup.enter)="onTitleEdit(editCardInput.value)" type="text"
+      class="full-width card-title-input px-2" placeholder="Enter a title for this card..."
+      [(ngModel)]="card.title"></textarea>
+  </div>
+</ng-template>

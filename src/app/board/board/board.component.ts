@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { List, Board } from './board';
+import { Board } from './board';
 import { UtilService } from 'src/app/util/services/util.service';
 import { BoardService } from './board.service';
+import { List } from '../list/list';
 
 @Component({
   selector: 'app-board',
@@ -66,7 +67,7 @@ export class BoardComponent implements OnInit {
    * @param list the list to be archived
    */
   public archiveList(list: List) {
-    this.board.listOfList = this.boardServ.removeListById(list.id, this.board.listOfList);
+    list.state = 'archived';
   }
 
 }

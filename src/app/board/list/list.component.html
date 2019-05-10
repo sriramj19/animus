@@ -1,16 +1,59 @@
-<div class="container white-bg br-5 p-2" *ngIf="currentList">
+<div class="container white-bg br-5 px-2 pt-2" *ngIf="currentList">
   <ng-container *ngIf="!editTitleState; else editListTitleTemplate">
-    <div class="row list-title clickable" (click)="toggleEditTitleState();">
+    <div class="row list-title clickable fs-small" (click)="toggleEditTitleState();">
       <div class="col">
-        {{currentList.title}}
+        <span class="animus-break-word">
+          {{currentList.title}}
+        </span>
         <i title="Archive list" class="material-icons float-right archive-icon"
           (click)="archiveCurrentList($event)">archive</i>
       </div>
     </div>
   </ng-container>
+
+  <ng-container *ngIf="currentList && currentList.cardList && currentList.cardList.length;">
+    <ng-container *ngFor="let card of currentList.cardList;">
+      <ng-container *ngIf="card.state === 'active'">
+        <card [card]="card" (archiveCard)="archiveCard(card)"></card>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="addCardState; else addCartFooterTemplate">
+    <div class="row no-gutters">
+      <div class="col">
+        <div class="white-bg px-2 pb-1 br-5">
+          <textarea #newCardInput (keyup.enter)="addNewCard(newCardInput.value)" type="text"
+            class="full-width card-title-input px-2" placeholder="Enter a title for this card..."></textarea>
+          <div class="row">
+            <div class="col">
+              <button class="primary-bg primary-hover white-color" (click)="addNewCard(newCardInput.value)"
+                mat-flat-button>
+                Add Card
+              </button>
+              <button title="Discard" mat-icon-button (click)="toggleAddCardState()">
+                <i class="material-icons">close</i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #addCartFooterTemplate>
+    <div class="row mt-1 color-faded add-card-wrapper p-1 clickable" (click)="toggleAddCardState()">
+      <div class="col">
+        <span class="add-card-icon">+</span>
+        <span class="add-card fs-small">
+          {{list?.cardList && list?.cardList.length ? 'Add another card' : 'Add a card'}}
+        </span>
+      </div>
+    </div>
+  </ng-template>
 </div>
 
 <ng-template #editListTitleTemplate>
-  <input #listTitle [(ngModel)]="currentList.title" (keyup.enter)="toggleEditTitleState()" type="text"
-    class="full-width title-input px-2" placeholder="Enter list title...">
+  <input #listTitle [(ngModel)]="currentList.title" (keyup.enter)="onTitleEdit(currentList.title)" type="text"
+    class="full-width list-title-input px-2" placeholder="Enter list title...">
 </ng-template>

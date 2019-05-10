@@ -1,5 +1,4 @@
 .list-title {
-  font-size: 0.9rem;
   font-weight: 500;
 }
 
@@ -11,5 +10,26 @@
 }
 
 .archive-icon:hover {
-    color: #FF3300;
+  color: #ff3300;
+}
+
+.add-card-wrapper {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+.add-card-wrapper:hover {
+  background-color: rgba(9, 30, 66, 0.13);
+  color: #172b4d;
+
+  .add-card {
+    text-decoration: underline;
+  }
+}
+
+.add-card-icon {
+  font-size: 1rem;
+  font-weight: 500;
 }
