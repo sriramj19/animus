@@ -76,7 +76,7 @@ export class CardComponent implements OnInit {
     try {
       let dialogRef: MatDialogRef<CardDetailDialog> = this.dialog.open(CardDetailDialog, {
         data: this.card,
-        width: '50vw',
+        width: this.utilServ.isMobile ? '80vw' : '50vw',
         maxHeight: 'auto',
         panelClass: 'animus-dialog-container',
         position: { top: '4rem' }

@@ -77,6 +77,9 @@ export class BoardComponent implements OnInit {
     this.setDragTrackers();
   }
 
+  /**
+   * @description set the lists that need to be tracked
+   */
   private setDragTrackers() {
     try {
       if (this.board && this.board.listOfList && this.board.listOfList.length) {
