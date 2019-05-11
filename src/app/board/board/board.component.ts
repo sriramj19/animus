@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Board } from './board';
 import { UtilService } from 'src/app/util/services/util.service';
-import { BoardService } from './board.service';
 import { List } from '../list/list';
 import { ANIMUSSAMPLEBOARD } from 'src/app/util/mock/animus.data';
+import { ListService } from '../list/list.service';
 
 @Component({
   selector: 'app-board',
@@ -12,7 +12,7 @@ import { ANIMUSSAMPLEBOARD } from 'src/app/util/mock/animus.data';
 })
 export class BoardComponent implements OnInit {
 
-  constructor(private utilServ: UtilService, private boardServ: BoardService) { }
+  constructor(private utilServ: UtilService, private listServ: ListService) { }
 
   public board: Board;
   public touchedNewListState: boolean;
@@ -62,7 +62,7 @@ export class BoardComponent implements OnInit {
    */
   public addNewList(title: string) {
     if (title && title.trim()) {
-      this.board.listOfList.push(this.boardServ.formNewList(title, this.board.listOfList));
+      this.board.listOfList.push(this.listServ.formNewList(title, this.board.listOfList));
       this.setDragTrackers();
       this.resetNewList();
     }
@@ -80,9 +80,9 @@ export class BoardComponent implements OnInit {
   private setDragTrackers() {
     try {
       if (this.board && this.board.listOfList && this.board.listOfList.length) {
-        this.boardServ.setTrackers(this.board.listOfList)
+        this.listServ.setTrackers(this.board.listOfList)
       } else {
-        this.boardServ.setTrackers([]);
+        this.listServ.setTrackers([]);
       }
     } catch (error) {
       this.utilServ.raiseException('setting drag tracker', error);

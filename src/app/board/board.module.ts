@@ -11,8 +11,8 @@ import { UtilService } from '../util/services/util.service';
 import { CardComponent } from './card/card.component';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { BoardService } from './board/board.service';
 import { CardDetailDialog } from './card/card-detail-dialog/card-detail.dialog';
+import { ListService } from './list/list.service';
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import { CardDetailDialog } from './card/card-detail-dialog/card-detail.dialog';
     DragDropModule,
     MatDialogModule
   ],
-  providers: [UtilService, BoardService],
+  providers: [UtilService, ListService],
   entryComponents: [CardDetailDialog]
 })
 export class BoardModule { }

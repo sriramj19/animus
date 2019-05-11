@@ -3,18 +3,18 @@ import { List } from './list';
 import { ListService } from './list.service';
 import { Card } from '../card/card';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { BoardService } from '../board/board.service';
 import { UtilService } from 'src/app/util/services/util.service';
+import { CardService } from '../card/card.service';
 
 @Component({
   selector: 'animus-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  providers: [ListService]
+  providers: [CardService]
 })
 export class ListComponent implements OnInit {
 
-  constructor(private listServ: ListService, private boardServ: BoardService, private utilServ: UtilService) { }
+  constructor(private listServ: ListService, private cardServ: CardService, private utilServ: UtilService) { }
 
   @Input('list') currentList: List;
   @Output('archiveList') private archiveList: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -77,7 +77,7 @@ export class ListComponent implements OnInit {
 
   public addNewCard(title: string) {
     if (title && title.trim()) {
-      this.currentList.cardList.push(this.listServ.formNewCard(title, this.currentList.cardList));
+      this.currentList.cardList.push(this.cardServ.formNewCard(title, this.currentList.cardList));
       this.toggleAddCardState();
     }
   }
@@ -123,7 +123,7 @@ export class ListComponent implements OnInit {
    * @description fetch the updated tracking ids of the lists to track
    */
   get trackingIds(): string[] {
-    return this.boardServ.trackingIds;
+    return this.listServ.trackingIds;
   }
 
 }
