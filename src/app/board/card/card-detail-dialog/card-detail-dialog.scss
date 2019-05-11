@@ -1,0 +1,35 @@
+.animus-dialog-heading, .animus-dialog-content-title {
+  font-weight: 600 !important;
+}
+
+.animus-comment-save:disabled {
+  background: #ecedf1;
+  color: #a7b0bc !important;
+}
+
+.animus-add-comment {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+  min-height: 20px;
+  position: relative;
+  text-decoration: none;
+  z-index: 0;
+}
+
+.animus-add-comment:focus {
+  box-shadow: 0 2px 4px rgba(9, 30, 66, 0.25);
+}
+
+.comment-container {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px -1px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
+  box-sizing: border-box;
+  clear: both;
+  display: inline-block;
+  margin: 4px 2px 4px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 460px;
+}

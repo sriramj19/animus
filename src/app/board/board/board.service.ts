@@ -47,6 +47,7 @@ export class BoardService {
     newList.title = title.trim();
     newList.state = 'active';
     newList.trackingId = 'animus-' + newList.id;
+    newList.createdDate = new Date().getTime();
     return newList;
   }
 

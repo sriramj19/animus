@@ -1,0 +1,67 @@
+<div class="container-fluid">
+    <div class="row pr-1">
+        <div class="col text-right">
+            <button mat-icon-button style="position: absolute; top: -15px; font-size: 1rem; font-weight: bold"
+                (click)="dialogRef.close()">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>
+    <div class="row" tabindex="1">
+        <div class="col-sm p-2 my-auto align-self-center">
+            <i class="material-icons align-bottom">credit_card</i>
+            <span class="animus-dialog-heading font-weight-bold animus-break-word">
+                {{card?.title}}
+            </span>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col align-self-center">
+            <i class="material-icons align-bottom">mode_comment</i>
+            <span class="ml-3 font font-weight-bold animus-dialog-content-title">Add Comment</span>
+
+            <div class="row mt-1">
+                <div class="col">
+                    <textarea #addCommentInput type="text" class="full-width card-title-input p-2 animus-add-comment"
+                        placeholder="Write a comment..."></textarea>
+                    <button [disabled]="!addCommentInput.value"
+                        class="primary-bg primary-hover white-color mt-2 animus-comment-save"
+                        (click)="addNewComment(addCommentInput.value)" mat-flat-button>
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-container *ngIf="card.comments && card.comments.length">
+
+        <div class="row mt-4">
+            <div class="col align-self-center">
+                <i class="material-icons align-bottom">list</i>
+                <span class="ml-3 font font-weight-bold animus-dialog-content-title">Activity</span>
+            </div>
+        </div>
+
+        <div class="row mt-3" *ngFor="let comment of card.comments; let last = last">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <span class="font-weight-bold">You</span>
+                        <span class="text-faded ml-2 small">{{comment.createdDate | date:'MMM d, h:mm a'}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="comment-container p-2">
+                            {{comment.body}}
+                        </div>
+                    </div>
+                </div>
+                <hr *ngIf="!last" class="mb-0 mt-2">
+            </div>
+        </div>
+
+    </ng-container>
+
+</div>

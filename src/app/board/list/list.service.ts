@@ -33,6 +33,7 @@ export class ListService {
     newCard.order = newCard.id;
     newCard.title = title.trim();
     newCard.state = 'active';
+    newCard.createdDate = new Date().getTime();
     return newCard;
   }
 

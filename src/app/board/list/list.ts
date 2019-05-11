@@ -7,4 +7,5 @@ export class List {
     order: number;
     cardList: Card[] = [];
     trackingId: string;
+    createdDate?: number;
 }

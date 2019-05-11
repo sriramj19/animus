@@ -16,7 +16,12 @@ export const ANIMUSSAMPLEBOARD: Board = {
                     title: 'In a board, users should be able to create or delete multiple LISTS.',
                     state: 'active',
                     order: 1,
-                    comments: []
+                    comments: [
+                        {
+                            body: 'Need to add structure for the board, lists and cards',
+                            createdDate: 1557547469139
+                        }
+                    ]
                 },
                 {
                     id: 2,
@@ -46,7 +51,16 @@ export const ANIMUSSAMPLEBOARD: Board = {
                     title: 'Between lists, users should have functionality to move cards from one list to another.',
                     state: 'active',
                     order: 2,
-                    comments: []
+                    comments: [
+                        {
+                            body: 'Need to lookup how it can be done. CDK could be a possibility',
+                            createdDate: 1557547559321
+                        },
+                        {
+                            body: 'CDK drag drop can be used to implement it',
+                            createdDate: 1557547469139
+                        }
+                    ]
                 }
             ]
         },

@@ -4,4 +4,5 @@ export class Board {
     id: number = 1;
     listOfList: List[] = [];
     name: string;
+    createdDate?: number;
 }

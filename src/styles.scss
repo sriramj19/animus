@@ -107,3 +107,18 @@ $darker-color: #458131;
 textarea {
   resize: none !important
 }
+
+.animus-dialog-container .mat-dialog-container {
+  font-size: 0.95rem;
+  background-color: #f4f6f7;
+  color: #0e2f4c;
+  padding-bottom: 4rem;
+}
+
+
+
+.cdk-global-overlay-wrapper {
+  pointer-events: all;
+  position: relative;
+  overflow: auto;
+}

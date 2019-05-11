@@ -1,12 +1,21 @@
 <ng-container *ngIf="card">
   <ng-container *ngIf="!editTitleState; else editCardTitleTemplate">
 
-    <div class="animus-card mt-2 p-1">
+    <div class="animus-card mt-2 p-1" (click)="openCardDetail()">
       <span class="fs-small">
         {{card.title}}
       </span>
+      <ng-container *ngIf="card.comments && card.comments.length">
+        <div class="row fs-small">
+          <div class="col">
+            <i class="fs-small material-icons align-middle text-muted">mode_comment</i>
+            <span class="small font-weight-bold text-muted align-text-top ml-1">{{card.comments.length}}</span>
+          </div>
+        </div>
+      </ng-container>
 
-      <div class=" options-icon" [matMenuTriggerFor]="cardMenu">
+
+      <div class="options-icon" (click)="onCardOptionsTriggered($event)" [matMenuTriggerFor]="cardMenu">
         <mat-icon>more_horiz</mat-icon>
         <mat-menu #cardMenu="matMenu">
           <button mat-menu-item (click)="toggleEditTitleState()">

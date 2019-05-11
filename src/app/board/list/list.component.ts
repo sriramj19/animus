@@ -106,9 +106,9 @@ export class ListComponent implements OnInit {
    */
   onCardDrop(event: CdkDragDrop<Card[]>) {
     try {
-      if (event.previousContainer === event.container) {
+      if (event.previousContainer === event.container) { // Same list
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      } else {
+      } else { // Different lists
         transferArrayItem(event.previousContainer.data,
           event.container.data,
           event.previousIndex,
