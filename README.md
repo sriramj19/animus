@@ -6,7 +6,7 @@ Animus is a Trello clone. It uses the popular web-based list-making concepts of 
 2. In each list, users would be able to add, update or delete multiple cards.
 3. Between lists, users would be able to move cards from one list to another.
 4. Each list will have a Title.
-5. Each card will have title, description and comments section.
+5. Each card will have title, description and comments section:
   * Each card can have multiple comments.
   * Each comment will have just body string.
 
